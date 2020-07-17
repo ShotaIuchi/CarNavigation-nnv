@@ -1,2 +1,4 @@
+include ':nnvmd'
+include ':nnvlib'
 include ':app'
 rootProject.name = "nnv"
