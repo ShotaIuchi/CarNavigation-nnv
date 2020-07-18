@@ -6,9 +6,9 @@ import android.view.SurfaceHolder
 import android.view.SurfaceView
 import androidx.databinding.BindingAdapter
 
-@BindingAdapter("mapHandle")
-fun bindingMapHandle(view: MapView, viewModel: NnvViewModel) {
-    view.setMapHandle(viewModel)
+@BindingAdapter("nnvViewModel")
+fun bindingAdapterNnvViewModel(view: MapView, viewModel: NnvViewModel) {
+    view.setNnvViewModel(viewModel)
 }
 
 open class MapView : SurfaceView, SurfaceHolder.Callback {
@@ -24,13 +24,13 @@ open class MapView : SurfaceView, SurfaceHolder.Callback {
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes)
 
-    fun setMapHandle(viewModel: NnvViewModel) {
+    public fun setNnvViewModel(viewModel: NnvViewModel) {
         this.viewModel = viewModel
     }
 
     override fun surfaceCreated(holder: SurfaceHolder?) {
         holder?.let {
-            this.width
+            viewModel.mapInitialize(holder, this.width, this.height)
         }
     }
 

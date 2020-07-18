@@ -2,6 +2,6 @@ package com.example.nnvmd
 
 import androidx.lifecycle.ViewModel
 
-class TopViewModel : ViewModel() {
+class MapViewModel : ViewModel() {
     // TODO: Implement the ViewModel
 }

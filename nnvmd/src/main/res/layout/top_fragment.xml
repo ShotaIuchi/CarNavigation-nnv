@@ -8,20 +8,24 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".TopFragment">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hello"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/map_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            app:navGraph="@navigation/map" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/ui_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="androidx.navigation.fragment.NavHostFragment" />
+
+    </FrameLayout>
 
 </layout>
