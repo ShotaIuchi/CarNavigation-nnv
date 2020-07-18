@@ -5,7 +5,6 @@ import android.util.AttributeSet
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 import androidx.databinding.BindingAdapter
-import com.example.nnvlib.model.MapHandle
 
 @BindingAdapter("mapHandle")
 fun bindingMapHandle(view: MapView, viewModel: NnvViewModel) {
@@ -30,6 +29,9 @@ open class MapView : SurfaceView, SurfaceHolder.Callback {
     }
 
     override fun surfaceCreated(holder: SurfaceHolder?) {
+        holder?.let {
+            this.width
+        }
     }
 
     override fun surfaceChanged(holder: SurfaceHolder?, format: Int, width: Int, height: Int) {}
@@ -37,6 +39,5 @@ open class MapView : SurfaceView, SurfaceHolder.Callback {
     override fun surfaceDestroyed(holder: SurfaceHolder?) {
         viewModel.updateMapHandle(null)
     }
-
 
 }

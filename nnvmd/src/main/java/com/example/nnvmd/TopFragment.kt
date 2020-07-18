@@ -10,6 +10,10 @@ import com.example.nnvlib.NnvViewModel
 
 class TopFragment : NnvFragment() {
 
+    companion object {
+        fun newInstance() = TopFragment()
+    }
+
     private var viewModel = activityViewModels<NnvViewModel>()
 
     init {

@@ -1,10 +1,12 @@
 package com.example.nnvlib
 
+import android.view.SurfaceHolder
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.nnvlib.model.MapHandle
 import com.example.nnvlib.model.NnvHandle
+import com.example.nnvlib.repository.MapRepository
 import com.example.nnvlib.util.Event
 
 class NnvViewModel : ViewModel() {
@@ -27,5 +29,10 @@ class NnvViewModel : ViewModel() {
 
     fun updateMapHandle(handle: MapHandle?) {
         _mapHandle.postValue(handle?.let{ Event(it) })
+    }
+
+    fun initializeMapHandle(surface:SurfaceHolder, w:Int, h: Int) {
+        val m = MapRepository(this, surface, w, h)
+        //m.
     }
 }
