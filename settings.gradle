@@ -1,3 +1,4 @@
+include ':otherlib'
 include ':nnvmd'
 include ':nnvlib'
 include ':app'
