@@ -20,7 +20,7 @@ class MapFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(layoutInflater, R.layout.map_fragment, container, false)
-        binding.vm = viewModel.value
+        binding.nnvViewModel = viewModel.value
         return binding.root
     }
 

@@ -15,15 +15,15 @@ class MapRepository(
     fun initialize() {
         GlobalScope.launch {
             var requestId = -1
-            MapManager.getInstance().addListener(object : MapManager.Listener {
+            MapManager.addListener(object : MapManager.Listener {
                 override fun onFix(reqId: Int, resultCode: Int, handle: String) {
                     if (requestId == reqId) {
-                        MapManager.getInstance().removeListener(this)
+                        MapManager.removeListener(this)
                         viewModel.updateMapHandle(MapHandle(handle))
                     }
                 }
             })
-            requestId = MapManager.getInstance().create(surface, w, h)
+            requestId = MapManager.create(surface, w, h)
         }
     }
 

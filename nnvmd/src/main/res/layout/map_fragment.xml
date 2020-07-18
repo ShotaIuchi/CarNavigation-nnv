@@ -6,11 +6,8 @@
 
     <data>
         <variable
-            name="vm"
+            name="nnvViewModel"
             type="com.example.nnvlib.NnvViewModel" />
-        <variable
-            name="xxx"
-            type="Integer" />
     </data>
 
     <FrameLayout
@@ -19,10 +16,9 @@
         tools:context=".MapFragment">
 
         <com.example.nnvlib.MapView
-            android:background="#ccFFcccc"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:nnvViewModel="@{vm}"/>
+            app:nnvViewModel="@{nnvViewModel}"/>
 
     </FrameLayout>
 

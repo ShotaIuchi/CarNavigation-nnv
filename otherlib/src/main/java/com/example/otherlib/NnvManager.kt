@@ -47,7 +47,7 @@ object NnvManager {
     fun create() : Int {
         reqId = Date().time.toInt()
         GlobalScope.launch {
-            delay(1000)
+            delay(100)
             listeners.forEach {
                 it.onFix(reqId, 0, Date().time.toString())
             }

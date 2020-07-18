@@ -7,24 +7,24 @@ import kotlinx.coroutines.*
 import java.util.*
 import kotlin.properties.Delegates
 
-class MapManager {
-
-    companion object {
-
-        @SuppressLint("StaticFieldLeak")
-        @Volatile private var INSTANCE: MapManager? = null
-
-        fun getInstance() =
-            INSTANCE ?: synchronized(MapManager::class.java) {
-                INSTANCE ?: MapManager()
-            }
-
-        @VisibleForTesting
-        fun destroyInstance() {
-            INSTANCE = null
-        }
-
-    }
+object MapManager {
+//
+//    companion object {
+//
+//        @SuppressLint("StaticFieldLeak")
+//        @Volatile private var INSTANCE: MapManager? = null
+//
+//        fun getInstance() =
+//            INSTANCE ?: synchronized(MapManager::class.java) {
+//                INSTANCE ?: MapManager()
+//            }
+//
+//        @VisibleForTesting
+//        fun destroyInstance() {
+//            INSTANCE = null
+//        }
+//
+//    }
 
     interface Listener {
         fun onFix(reqId: Int, resultCode: Int, handle: String)
@@ -44,8 +44,8 @@ class MapManager {
 
     suspend fun create(surface: SurfaceHolder, w:Int, h: Int) : Int {
         reqId = Date().time.toInt()
-        withContext(Dispatchers.Default)  {
-            delay(1000)
+        GlobalScope.launch {
+            delay(100)
             listeners.forEach {
                 it.onFix(reqId, 0, Date().time.toString())
             }
