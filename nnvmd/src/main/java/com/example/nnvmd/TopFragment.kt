@@ -14,7 +14,7 @@ import com.example.nnvlib.NnvViewModel
 import com.example.nnvlib.model.NnvHandle
 import com.example.nnvmd.databinding.TopFragmentBinding
 
-class TopFragment : NnvFragment() {
+class TopFragment : NnvFragment(), OnBackPressEvent {
 
     companion object {
         fun newInstance() = TopFragment()
@@ -33,18 +33,15 @@ class TopFragment : NnvFragment() {
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         binding = DataBindingUtil.inflate(layoutInflater, R.layout.top_fragment, container, false)
-
-        viewModel.value.longTapPoint.observe(viewLifecycleOwner, Observer { p ->
-            p.getContentIfNotHandled()?.let {
-                Toast.makeText(context, it.name, Toast.LENGTH_SHORT).show()
-            }
-        })
-
         return binding.root
     }
 
     override fun onInitialize() {
         Navigation.findNavController(binding.mapContainer).navigate(R.id.action_toMap)
+    }
+
+    override fun onBackPress(): Boolean {
+        return Navigation.findNavController(binding.uiContainer).popBackStack()
     }
 
 }

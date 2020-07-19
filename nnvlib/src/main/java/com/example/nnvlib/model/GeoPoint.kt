@@ -10,4 +10,8 @@ class GeoPoint(val oGeoPoint: OGeoPoint) {
     val lo:Int
         get() = oGeoPoint.lo
 
+    override fun toString(): String {
+        return "$la - $lo"
+    }
+
 }
