@@ -16,7 +16,7 @@
             app:destination="@id/pontFragment" />
         <action
             android:id="@+id/action_rootFragment_to_searchFragment"
-            app:destination="@id/searchFragment" />
+            app:destination="@id/nested_search" />
     </fragment>
     <fragment
         android:id="@+id/pointDetailFragment"
@@ -43,38 +43,47 @@
             app:destination="@id/routeFragment" />
     </fragment>
     <fragment
-        android:id="@+id/searchFragment"
-        android:name="com.example.nnvmd.SearchFragment"
-        android:label="search_fragment"
-        tools:layout="@layout/search_fragment" >
-        <action
-            android:id="@+id/action_searchFragment_to_searchResultFragment"
-            app:destination="@id/searchResultFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/searchResultFragment"
-        android:name="com.example.nnvmd.SearchResultFragment"
-        android:label="search_result_fragment"
-        tools:layout="@layout/search_result_fragment" >
-        <action
-            android:id="@+id/action_searchResultFragment_to_searchResultDetailFragment"
-            app:destination="@id/searchResultDetailFragment" />
-        <action
-            android:id="@+id/action_searchResultFragment_to_routeFragment"
-            app:destination="@id/routeFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/searchResultDetailFragment"
-        android:name="com.example.nnvmd.SearchResultDetailFragment"
-        android:label="search_result_detail_fragment"
-        tools:layout="@layout/search_result_detail_fragment" >
-        <action
-            android:id="@+id/action_searchResultDetailFragment_to_routeFragment"
-            app:destination="@id/routeFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/routeFragment"
         android:name="com.example.nnvmd.RouteFragment"
         android:label="route_fragment"
-        tools:layout="@layout/route_fragment" />
+        tools:layout="@layout/route_fragment" >
+        <action
+            android:id="@+id/action_routeFragment_to_nested_search"
+            app:destination="@id/nested_search"
+            app:popUpTo="@id/nested_search"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <navigation android:id="@+id/nested_search"
+        app:startDestination="@id/searchFragment">
+        <fragment
+            android:id="@+id/searchFragment"
+            android:name="com.example.nnvmd.SearchFragment"
+            android:label="search_fragment"
+            tools:layout="@layout/search_fragment">
+            <action
+                android:id="@+id/action_searchFragment_to_searchResultFragment"
+                app:destination="@id/searchResultFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/searchResultFragment"
+            android:name="com.example.nnvmd.SearchResultFragment"
+            android:label="search_result_fragment"
+            tools:layout="@layout/search_result_fragment">
+            <action
+                android:id="@+id/action_searchResultFragment_to_searchResultDetailFragment"
+                app:destination="@id/searchResultDetailFragment" />
+            <action
+                android:id="@+id/action_searchResultFragment_to_routeFragment"
+                app:destination="@id/routeFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/searchResultDetailFragment"
+            android:name="com.example.nnvmd.SearchResultDetailFragment"
+            android:label="search_result_detail_fragment"
+            tools:layout="@layout/search_result_detail_fragment">
+            <action
+                android:id="@+id/action_searchResultDetailFragment_to_routeFragment"
+                app:destination="@id/routeFragment" />
+        </fragment>
+    </navigation>
 </navigation>
