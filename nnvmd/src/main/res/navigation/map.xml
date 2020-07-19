@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/blankFragment"
-        android:name="com.example.nnvmd.BlankFragment"
+        android:name="com.example.nnvmd.map.BlankFragment"
         android:label="blank_fragment"
         tools:layout="@layout/blank_fragment" >
         <action
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/mapFragment"
-        android:name="com.example.nnvmd.MapFragment"
+        android:name="com.example.nnvmd.map.MapFragment"
         android:label="map_fragment"
         tools:layout="@layout/map_fragment" >
         <action

@@ -1,4 +1,4 @@
-package com.example.nnvmd
+package com.example.nnvmd.map
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.nnvlib.NnvViewModel
+import com.example.nnvmd.R
 import com.example.nnvmd.databinding.MapFragmentBinding
 
 class MapFragment : Fragment() {
