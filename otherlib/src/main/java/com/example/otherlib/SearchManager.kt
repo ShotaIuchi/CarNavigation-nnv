@@ -1,16 +1,19 @@
 package com.example.otherlib
 
-import android.view.SurfaceHolder
+import com.example.otherlib.data.OGeoPoint
+import com.example.otherlib.data.ONnvHandle
+import com.example.otherlib.data.OSearchInfo
+import com.example.otherlib.data.OSuggestionInfo
 import kotlinx.coroutines.*
 import java.util.*
 import kotlin.properties.Delegates
 
 object SearchManager {
 
-    class Listener {
-        fun onFix(reqId: Int, resultCode: Int, handle: String) {}
-        fun onSuggestion(reqId: Int, resultCode: Int, handle: String) {}
-        fun onSearch(reqId: Int, resultCode: Int, handle: String) {}
+    interface Listener {
+        fun onCloseFix(reqId: Int, resultCode: Int) {}
+        fun onSuggestionFix(reqId: Int, resultCode: Int, suggestion: OSuggestionInfo) {}
+        fun onSearchFix(reqId: Int, resultCode: Int, search: OSearchInfo) {}
     }
 
     private var reqId by Delegates.notNull<Int>()
@@ -25,15 +28,40 @@ object SearchManager {
         listeners.remove(listener)
     }
 
-    suspend fun create(surface: SurfaceHolder, w:Int, h: Int) : Int {
+    fun search(nnvHandle: ONnvHandle?, isSuggestion: Boolean) : Int {
         reqId = Date().time.toInt()
         GlobalScope.launch {
             delay(100)
-            listeners.forEach {
-                it.onFix(reqId, 0, Date().time.toString())
+            if (isSuggestion) {
+                GlobalScope.launch {
+                    (0..10).forEach { n ->
+                        delay(10)
+                        listeners.forEach {
+                            it.onSuggestionFix(reqId, 0, OSuggestionInfo("a"))
+                        }
+                    }
+                }
+            } else {
+                GlobalScope.launch {
+                    (0..10).forEach { n ->
+                        delay(10)
+                        listeners.forEach {
+                            it.onSearchFix(reqId, 0, OSearchInfo(OGeoPoint(Date().time.toInt(), Date().time.toInt())))
+                        }
+                    }
+                }
             }
         }
         return reqId
+    }
+
+    fun close(nnvHandle: ONnvHandle, reqId: Int) {
+        GlobalScope.launch {
+            delay(100)
+            listeners.forEach {
+                it.onCloseFix(reqId, 0)
+            }
+        }
     }
 
 }

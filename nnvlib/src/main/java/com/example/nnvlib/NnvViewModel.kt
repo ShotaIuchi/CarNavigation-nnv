@@ -4,14 +4,13 @@ import android.view.SurfaceHolder
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.nnvlib.model.GeoPoint
-import com.example.nnvlib.model.MapHandle
-import com.example.nnvlib.model.NnvHandle
-import com.example.nnvlib.model.PointInfo
+import com.example.nnvlib.model.*
 import com.example.nnvlib.repository.Geo2PointInfoRepository
 import com.example.nnvlib.repository.MapRepository
 import com.example.nnvlib.repository.NnvRepository
+import com.example.nnvlib.repository.SearchRepository
 import com.example.nnvlib.util.Event
+import com.example.otherlib.SearchManager
 
 class NnvViewModel : ViewModel() {
 
@@ -45,6 +44,26 @@ class NnvViewModel : ViewModel() {
         _mapHandle.postValue(handle?.let{ Event(it) })
     }
 
+
+    //
+    private var searchRepository : SearchRepository? = null
+
+    private val _searchSuggestion = MutableLiveData<Event<List<PointInfo>>>()
+    val searchSuggestion : LiveData<Event<List<PointInfo>>>
+        get() = _searchSuggestion
+
+
+
+
+
+    // RouteInfo
+    private val _routeInfo = MutableLiveData<Event<RouteInfo>>()
+    val routeInfo : LiveData<Event<RouteInfo>>
+        get() = _routeInfo
+
+    fun updateRouteInfo(handle: RouteInfo?) {
+        _routeInfo.postValue(handle?.let{ Event(it) })
+    }
 
     // LogTap
     private val _longTapPoint = MutableLiveData<Event<PointInfo>>()
