@@ -1,3 +1,5 @@
 package com.example.nnvlib.model
 
-data class MapHandle(val handle: String)
+import com.example.otherlib.data.OMapHandle
+
+data class MapHandle(val handle: OMapHandle)

@@ -3,6 +3,7 @@ package com.example.nnvlib.repository
 import com.example.nnvlib.NnvViewModel
 import com.example.nnvlib.model.NnvHandle
 import com.example.otherlib.NnvManager
+import com.example.otherlib.data.ONnvHandle
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -14,7 +15,7 @@ class NnvRepository(private val viewModel: NnvViewModel
     fun initialize() {
         GlobalScope.launch {
             NnvManager.addListener(object : NnvManager.Listener {
-                override fun onFix(reqId: Int, resultCode: Int, handle: String) {
+                override fun onFix(reqId: Int, resultCode: Int, handle: ONnvHandle) {
                     if (requestId == reqId) {
                         NnvManager.removeListener(this)
                         viewModel.updateNnvHandle(NnvHandle(handle))

@@ -1,3 +1,5 @@
 package com.example.nnvlib.model
 
-data class NnvHandle(val handle: String)
+import com.example.otherlib.data.ONnvHandle
+
+data class NnvHandle(val handle: ONnvHandle)

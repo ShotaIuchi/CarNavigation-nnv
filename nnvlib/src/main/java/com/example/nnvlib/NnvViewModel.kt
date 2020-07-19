@@ -33,11 +33,16 @@ open class NnvViewModel : ViewModel() {
         get() = _mapHandle
 
     fun mapInitialize(surface:SurfaceHolder, w:Int, h: Int) {
-        MapRepository(this, surface, w, h).initialize()
+        _nnvHandle.value?.peekContent()?.let {
+            MapRepository(this, it.handle, surface, w, h).initialize()
+        }
     }
 
     fun updateMapHandle(handle: MapHandle?) {
         _mapHandle.postValue(handle?.let{ Event(it) })
     }
+
+
+    // LogTap
 
 }

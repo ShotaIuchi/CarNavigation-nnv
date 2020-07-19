@@ -7,9 +7,11 @@ import android.graphics.Rect
 import android.util.AttributeSet
 import android.view.SurfaceHolder
 import android.view.SurfaceView
+import android.view.View
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.Observer
 import androidx.lifecycle.findViewTreeLifecycleOwner
+import com.example.otherlib.MapManager
 
 @BindingAdapter("nnvViewModel")
 fun bindingAdapterNnvViewModel(view: MapView, viewModel: NnvViewModel) {
@@ -22,6 +24,10 @@ open class MapView : SurfaceView, SurfaceHolder.Callback {
 
     init {
         holder.addCallback(this)
+        setOnLongClickListener {
+            MapManager.onLongClick(it)
+            true
+        }
     }
 
     constructor(context: Context?) : super(context)
@@ -29,7 +35,7 @@ open class MapView : SurfaceView, SurfaceHolder.Callback {
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes)
 
-    public fun setNnvViewModel(viewModel: NnvViewModel) {
+    fun setNnvViewModel(viewModel: NnvViewModel) {
         this.viewModel = viewModel
         findViewTreeLifecycleOwner()?.let {
             this.viewModel.mapHandle.observe(it, Observer { map ->

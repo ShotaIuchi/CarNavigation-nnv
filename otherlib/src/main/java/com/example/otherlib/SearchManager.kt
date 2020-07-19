@@ -1,17 +1,18 @@
 package com.example.otherlib
 
-import android.annotation.SuppressLint
 import android.view.SurfaceHolder
-import androidx.annotation.VisibleForTesting
-import com.example.otherlib.data.ONnvHandle
+import android.view.View
+import com.example.otherlib.data.OGeoPoint
 import kotlinx.coroutines.*
 import java.util.*
 import kotlin.properties.Delegates
 
-object NnvManager {
+object SearchManager {
 
-    interface Listener {
-        fun onFix(reqId: Int, resultCode: Int, handle: ONnvHandle)
+    class Listener {
+        fun onFix(reqId: Int, resultCode: Int, handle: String) {}
+        fun onSuggestion(reqId: Int, resultCode: Int, handle: String) {}
+        fun onSearch(reqId: Int, resultCode: Int, handle: String) {}
     }
 
     private var reqId by Delegates.notNull<Int>()
@@ -26,12 +27,12 @@ object NnvManager {
         listeners.remove(listener)
     }
 
-    fun create() : Int {
+    suspend fun create(surface: SurfaceHolder, w:Int, h: Int) : Int {
         reqId = Date().time.toInt()
         GlobalScope.launch {
             delay(100)
             listeners.forEach {
-                it.onFix(reqId, 0, ONnvHandle(Date().time.toString()))
+                it.onFix(reqId, 0, Date().time.toString())
             }
         }
         return reqId
