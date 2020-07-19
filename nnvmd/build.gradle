@@ -40,6 +40,7 @@ android {
 
 dependencies {
     implementation project(":nnvlib")
+    implementation project(":otherlib")
 }
 
 dependencies {
