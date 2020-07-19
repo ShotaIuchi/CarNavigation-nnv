@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.example.nnvlib.NnvFragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.example.nnvlib.NnvViewModel
 import com.example.nnvlib.model.NnvHandle
@@ -31,6 +33,13 @@ class TopFragment : NnvFragment() {
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         binding = DataBindingUtil.inflate(layoutInflater, R.layout.top_fragment, container, false)
+
+        viewModel.value.longTapPoint.observe(viewLifecycleOwner, Observer { p ->
+            p.getContentIfNotHandled()?.let {
+                Toast.makeText(context, it.name, Toast.LENGTH_SHORT).show()
+            }
+        })
+
         return binding.root
     }
 

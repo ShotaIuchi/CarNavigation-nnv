@@ -4,13 +4,16 @@ import android.view.SurfaceHolder
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.nnvlib.model.GeoPoint
 import com.example.nnvlib.model.MapHandle
 import com.example.nnvlib.model.NnvHandle
+import com.example.nnvlib.model.PointInfo
+import com.example.nnvlib.repository.Geo2PointInfoRepository
 import com.example.nnvlib.repository.MapRepository
 import com.example.nnvlib.repository.NnvRepository
 import com.example.nnvlib.util.Event
 
-open class NnvViewModel : ViewModel() {
+class NnvViewModel : ViewModel() {
 
     // NnvHandle
     private val _nnvHandle = MutableLiveData<Event<NnvHandle>>()
@@ -44,5 +47,18 @@ open class NnvViewModel : ViewModel() {
 
 
     // LogTap
+    private val _longTapPoint = MutableLiveData<Event<PointInfo>>()
+    val longTapPoint : LiveData<Event<PointInfo>>
+        get() = _longTapPoint
+
+    fun onTouch(geoPoint: GeoPoint) {
+        _nnvHandle.value?.peekContent()?.let {
+            Geo2PointInfoRepository(this, it.handle).search(geoPoint)
+        }
+    }
+
+    fun updateLongTapPoint(handle: PointInfo?) {
+        _longTapPoint.postValue(handle?.let{ Event(it) })
+    }
 
 }

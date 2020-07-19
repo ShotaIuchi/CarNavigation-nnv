@@ -1,16 +1,17 @@
 package com.example.otherlib
 
-import android.view.SurfaceHolder
-import kotlinx.coroutines.*
+import com.example.otherlib.data.OGeoPoint
+import com.example.otherlib.data.OPointInfo
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.properties.Delegates
 
-object SearchManager {
+object SearchPointManager {
 
-    class Listener {
-        fun onFix(reqId: Int, resultCode: Int, handle: String) {}
-        fun onSuggestion(reqId: Int, resultCode: Int, handle: String) {}
-        fun onSearch(reqId: Int, resultCode: Int, handle: String) {}
+    interface Listener {
+        fun onSearch(reqId: Int, resultCode: Int, pointInfo: OPointInfo) {}
     }
 
     private var reqId by Delegates.notNull<Int>()
@@ -25,12 +26,12 @@ object SearchManager {
         listeners.remove(listener)
     }
 
-    suspend fun create(surface: SurfaceHolder, w:Int, h: Int) : Int {
+    suspend fun search(point: OGeoPoint) : Int {
         reqId = Date().time.toInt()
         GlobalScope.launch {
             delay(100)
             listeners.forEach {
-                it.onFix(reqId, 0, Date().time.toString())
+                it.onSearch(reqId, 0, OPointInfo(point, "shiga", "shiga-ken", "biwako"))
             }
         }
         return reqId

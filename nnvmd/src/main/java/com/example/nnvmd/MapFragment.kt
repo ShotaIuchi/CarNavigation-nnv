@@ -13,14 +13,14 @@ import com.example.nnvmd.databinding.MapFragmentBinding
 class MapFragment : Fragment() {
 
     private lateinit var binding: MapFragmentBinding
-    private var viewModel = activityViewModels<NnvViewModel>()
+    private val viewModel by activityViewModels<NnvViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(layoutInflater, R.layout.map_fragment, container, false)
-        binding.nnvViewModel = viewModel.value
+        binding.nnvViewModel = viewModel
         return binding.root
     }
 

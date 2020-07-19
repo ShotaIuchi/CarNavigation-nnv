@@ -3,22 +3,22 @@ package com.example.nnvlib
 import android.content.Context
 import android.graphics.BitmapFactory
 import android.graphics.Paint
-import android.graphics.Rect
 import android.util.AttributeSet
 import android.view.SurfaceHolder
 import android.view.SurfaceView
-import android.view.View
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.Observer
 import androidx.lifecycle.findViewTreeLifecycleOwner
+import com.example.nnvlib.model.GeoPoint
 import com.example.otherlib.MapManager
+import com.example.otherlib.data.OGeoPoint
 
 @BindingAdapter("nnvViewModel")
 fun bindingAdapterNnvViewModel(view: MapView, viewModel: NnvViewModel) {
     view.setNnvViewModel(viewModel)
 }
 
-open class MapView : SurfaceView, SurfaceHolder.Callback {
+class MapView : SurfaceView, SurfaceHolder.Callback, MapManager.Listener {
 
     private lateinit var viewModel: NnvViewModel
 
@@ -51,14 +51,20 @@ open class MapView : SurfaceView, SurfaceHolder.Callback {
 
     override fun surfaceCreated(holder: SurfaceHolder?) {
         holder?.let {
+            MapManager.addListener(this)
             viewModel.mapInitialize(holder, this.width, this.height)
+
         }
     }
 
     override fun surfaceChanged(holder: SurfaceHolder?, format: Int, width: Int, height: Int) {}
 
     override fun surfaceDestroyed(holder: SurfaceHolder?) {
+        MapManager.removeListener(this)
         viewModel.updateMapHandle(null)
     }
 
+    override fun onTouch(geoPoint: OGeoPoint) {
+        viewModel.onTouch(GeoPoint(geoPoint))
+    }
 }

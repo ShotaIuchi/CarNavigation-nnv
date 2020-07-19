@@ -1,3 +1,3 @@
 package com.example.otherlib.data
 
-data class OGeoPoint(val la:Int, val lo:Int)
+open class OGeoPoint(val la:Int, val lo:Int) {}

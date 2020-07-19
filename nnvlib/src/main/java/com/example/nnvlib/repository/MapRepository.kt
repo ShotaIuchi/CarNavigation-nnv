@@ -4,6 +4,7 @@ import android.view.SurfaceHolder
 import com.example.nnvlib.NnvViewModel
 import com.example.nnvlib.model.MapHandle
 import com.example.otherlib.MapManager
+import com.example.otherlib.data.OGeoPoint
 import com.example.otherlib.data.OMapHandle
 import com.example.otherlib.data.ONnvHandle
 import kotlinx.coroutines.GlobalScope
