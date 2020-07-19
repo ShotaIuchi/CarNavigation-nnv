@@ -1,5 +1,6 @@
 package com.example.nnvlib
 
+import android.provider.ContactsContract
 import android.view.SurfaceHolder
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,6 +12,9 @@ import com.example.nnvlib.repository.NnvRepository
 import com.example.nnvlib.repository.SearchRepository
 import com.example.nnvlib.util.Event
 import com.example.otherlib.SearchManager
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class NnvViewModel : ViewModel() {
 
@@ -46,11 +50,29 @@ class NnvViewModel : ViewModel() {
 
 
     //
-    private var searchRepository : SearchRepository? = null
+    private var searchJob : Job? = null
 
-    private val _searchSuggestion = MutableLiveData<Event<List<PointInfo>>>()
-    val searchSuggestion : LiveData<Event<List<PointInfo>>>
+    private val _searchSuggestion = MutableLiveData<Event<List<SuggestionInfo>>>()
+    val searchSuggestion : LiveData<Event<List<SuggestionInfo>>>
         get() = _searchSuggestion
+
+    fun updateSearchSuggestion(suggestions: List<SuggestionInfo>) {
+        _searchSuggestion.postValue(Event(suggestions))
+    }
+
+
+    fun search() {
+        GlobalScope.launch {
+            searchJob?.cancel()
+            _nnvHandle.value?.peekContent()?.let {
+                val s = SearchRepository(this@NnvViewModel, it.handle)
+                s.close()
+                searchJob = SearchRepository(this@NnvViewModel, it.handle).searchSuggestion("hoge")
+            }
+        }
+    }
+
+
 
 
 
