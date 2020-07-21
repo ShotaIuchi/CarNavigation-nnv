@@ -22,7 +22,7 @@ class RootFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.root_fragment, container, false)
-        binding.searchBar.setOnClickListener() {
+        binding.searchBar.setOnClickListener {
             findNavController().navigate(R.id.toSearch)
         }
         viewModel.value.longTapPoint.observe(viewLifecycleOwner, Observer { p ->
