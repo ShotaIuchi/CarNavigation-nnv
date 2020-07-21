@@ -19,7 +19,7 @@ class SearchRepository(
     private val nnvHandle: ONnvHandle
 ) {
 
-    suspend fun close(requestId: Int) : Int {
+    suspend fun close(requestId: Int): Int {
         return suspendCoroutine {
             GlobalScope.launch {
                 SearchManager.addListener(object : SearchManager.Listener {
@@ -54,23 +54,4 @@ class SearchRepository(
         }
     }
 
-
-//    fun searchSuggestion(routeRequest: RouteRequest) {
-//
-//
-//
-//        GlobalScope.launch {
-//            var requestId = -1
-//            SearchManager.addListener(object : SearchManager.Listener {
-////                override fun onFix(reqId: Int, resultCode: Int, handle: String) {
-////                    if (requestId == reqId) {
-////                        SearchManager.removeListener(this)
-////                        viewModel.updateRouteInfo(RouteInfo(handle))
-////                    }
-////                }
-//
-//            })
-//            requestId = SearchManager.search(nnvHandle, true)
-//        }
-//    }
 }
