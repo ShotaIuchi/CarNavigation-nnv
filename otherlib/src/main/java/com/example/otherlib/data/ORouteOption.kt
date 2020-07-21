@@ -1,6 +1,6 @@
 package com.example.otherlib.data
 
-class GRouteOption(
+class ORouteOption(
     val startTime: Int?,
     val endTime: Int?
 ) {
