@@ -51,7 +51,7 @@ class SearchRepository(
                 }
             })
             requestId = SearchManager.search(nnvHandle, false)
-        },
+        }
     }
 
 

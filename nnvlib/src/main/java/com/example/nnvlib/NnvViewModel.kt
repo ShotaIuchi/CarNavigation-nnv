@@ -66,7 +66,7 @@ class NnvViewModel : ViewModel() {
             searchJob?.cancel()
             _nnvHandle.value?.peekContent()?.let {
                 val s = SearchRepository(this@NnvViewModel, it.handle)
-                s.close()
+                //s.close()
                 searchJob = SearchRepository(this@NnvViewModel, it.handle).searchSuggestion("hoge")
             }
         }
