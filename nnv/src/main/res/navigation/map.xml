@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/map"
+    app:startDestination="@id/blankFragment">
+
+    <fragment
+        android:id="@+id/blankFragment"
+        android:name="com.example.nnv.map.BlankFragment"
+        android:label="blank_fragment"
+        tools:layout="@layout/blank_fragment" >
+        <action
+            android:id="@+id/action_toMap"
+            app:destination="@id/mapFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.example.nnv.map.MapFragment"
+        android:label="map_fragment"
+        tools:layout="@layout/map_fragment" >
+        <action
+            android:id="@+id/action_toMap"
+            app:destination="@id/mapFragment" />
+    </fragment>
+</navigation>

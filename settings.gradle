@@ -1,5 +1,5 @@
 include ':otherlib'
-include ':nnvmd'
+include ':nnv'
 include ':nnvlib'
 include ':app'
-rootProject.name = "nnv"
+rootProject.name = "nnvtest"
